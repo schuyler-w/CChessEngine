@@ -1,7 +1,7 @@
 #ifndef CHESSENGINE_DEFS_H
 #define CHESSENGINE_DEFS_H
 
-typedef unsigned long long U64;
+typedef unsigned long long U64; // 64 bit long long integer defn
 
 #define NAME "Chess Engine v1.0"
 #define BRD_SQ_NUM 120
@@ -22,6 +22,35 @@ enum {
     A5 = 61, B5, C5, D5, E5, F5, G5, H5,
     A6 = 71, B6, C6, D6, E6, F6, G6, H6,
     A7 = 81, B7, C7, D7, E7, F7, G7, H7,
-    A8 = 91, B8, C8, D8, E8, F8, G8, H8,
+    A8 = 91, B8, C8, D8, E8, F8, G8, H8, NO_SQUARE, OFFBOARD
 };
+
+enum {FALSE, TRUE };
+
+typedef struct {
+
+    int pieces[BRD_SQ_NUM];
+    U64 pawns[3]; // Array of 3 pawns (white, black, both)
+    int KingSq[2];
+
+    int side;
+    int enPas;
+    int FiftyMove;
+
+    int ply;
+    int hisply;
+
+    int castlePerm;
+
+    U64 posKey;
+
+    int pceNum[13];
+    int bigPce[2];
+    int majPce[2];
+    int minPce[2];
+    int material[2];
+
+
+} S_BOARD;
+
 #endif //CHESSENGINE_DEFS_H
