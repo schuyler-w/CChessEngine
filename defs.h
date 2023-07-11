@@ -1,9 +1,9 @@
 #ifndef CHESSENGINE_DEFS_H
 #define CHESSENGINE_DEFS_H
 
-typedef unsigned long long U64; // 64 bit long long integer defn
+typedef unsigned long long U64; // 64 bit long long integer definition
 
-#define NAME "Chess Engine v1.0"
+#define NAME "Chess Engine v0.1"
 #define BRD_SQ_NUM 120
 
 enum { EMPTY, wP, wKn, wB, wR, wQ, wK, bP, bKn, bB, bR, bQ, bK };
