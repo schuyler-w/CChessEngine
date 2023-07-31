@@ -1,6 +1,25 @@
 #ifndef CHESSENGINE_DEFS_H
 #define CHESSENGINE_DEFS_H
 
+#include "stdlib.h"
+#include "stdio.h"
+
+// #define DEBUG
+
+#define MAX_HASH 1024
+#ifndef DEBUG
+#define ASSERT(n)
+#else
+#define ASSERT(n)                \
+if(!(n)) {                       \
+printf("%s - Failed",#n);        \
+printf("On %s ",__DATE__);       \
+printf("At %s ",__TIME__);       \
+printf("In File %s ",__FILE__);  \
+printf("At Line %d\n",__LINE__); \
+exit(1);}
+#endif
+
 typedef unsigned long long U64; // 64 bit long long integer definition
 
 #define NAME "Chess Engine v0.1"
@@ -29,9 +48,9 @@ enum {
 
 enum { FALSE, TRUE };
 
-enum { WKCA = 1, WQCA = 2, BKCA = 4, BQCA = 8 }; // Castling mechanic
+enum { WKCA = 1, WQCA = 2, BKCA = 4, BQCA = 8 }; // Castling permissions, integer 0 0 0 0, each bit denoting perm
 
-typedef struct {
+typedef struct { // Undo move data structure
     int move;
     int castlePerm;
     int enPas;
@@ -53,7 +72,7 @@ typedef struct {
     int play;
     int hisPlay;
 
-    int castlePerm; // Castle permissions
+    int castlePerm; // Castle permission int ie: 0 0 0 0
 
     U64 posKey;
 
@@ -68,5 +87,16 @@ typedef struct {
     S_UNDO history[MAX_GAME_MOVES]; // stores game information into U_UNDO type array named history
 
 } S_BOARD;
+
+/* MACROS */
+
+#define FR2SQ(f,r) ( (21 + (f) ) + ( (r) * 10 ) ) // f = file, r = rank
+
+/* GLOBALS */
+
+extern int Sq120ToSq64[BRD_SQ_NUM];
+extern int Sq64ToSq120[64];
+
+/* FUNCTIONS */
 
 #endif //CHESSENGINE_DEFS_H

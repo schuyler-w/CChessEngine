@@ -52,6 +52,12 @@ build CMakeFiles/ChessEngine.dir/main.c.o: C_COMPILER__ChessEngine_Debug /Users/
   OBJECT_DIR = CMakeFiles/ChessEngine.dir
   OBJECT_FILE_DIR = CMakeFiles/ChessEngine.dir
 
+build CMakeFiles/ChessEngine.dir/init.c.o: C_COMPILER__ChessEngine_Debug /Users/schuyler/Documents/ResumeProjects/ChessEngine/init.c || cmake_object_order_depends_target_ChessEngine
+  DEP_FILE = CMakeFiles/ChessEngine.dir/init.c.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics -std=gnu2x
+  OBJECT_DIR = CMakeFiles/ChessEngine.dir
+  OBJECT_FILE_DIR = CMakeFiles/ChessEngine.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target ChessEngine
@@ -60,7 +66,7 @@ build CMakeFiles/ChessEngine.dir/main.c.o: C_COMPILER__ChessEngine_Debug /Users/
 #############################################
 # Link the executable ChessEngine
 
-build ChessEngine: C_EXECUTABLE_LINKER__ChessEngine_Debug CMakeFiles/ChessEngine.dir/main.c.o
+build ChessEngine: C_EXECUTABLE_LINKER__ChessEngine_Debug CMakeFiles/ChessEngine.dir/main.c.o CMakeFiles/ChessEngine.dir/init.c.o
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk
   OBJECT_DIR = CMakeFiles/ChessEngine.dir
   POST_BUILD = :
