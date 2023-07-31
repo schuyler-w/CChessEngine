@@ -4,6 +4,9 @@
 
 #include "defs.h"
 
+int Sq120ToSq64[BRD_SQ_NUM];
+int Sq64ToSq120[64];
+
 void InitSq120To64() {
 
     int index = 0;
@@ -12,7 +15,7 @@ void InitSq120To64() {
     int sq = A1;
     int sq64 = 0;
     for(index = 0; index < BRD_SQ_NUM; ++index) {
-        Sq120ToSq64[index] = 65; // setting values of board to invalid value
+        Sq120ToSq64[index] = 99; // setting values of board to invalid value
     }
 
     for(index = 0; index < 64; ++index) {
@@ -31,5 +34,5 @@ void InitSq120To64() {
 }
 
 void AllInit() {
-
+    InitSq120To64();
 }

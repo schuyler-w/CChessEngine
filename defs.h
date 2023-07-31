@@ -99,4 +99,6 @@ extern int Sq64ToSq120[64];
 
 /* FUNCTIONS */
 
+extern void AllInit();
+
 #endif //CHESSENGINE_DEFS_H
