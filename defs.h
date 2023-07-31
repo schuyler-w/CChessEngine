@@ -6,6 +6,8 @@ typedef unsigned long long U64; // 64 bit long long integer definition
 #define NAME "Chess Engine v0.1"
 #define BRD_SQ_NUM 120
 
+#define MAX_GAME_MOVES 2048 // 1024 half moves
+
 enum { EMPTY, wP, wKn, wB, wR, wQ, wK, bP, bKn, bB, bR, bQ, bK };
 enum { FILE_A, FILE_B, FILE_C, FILE_D, FILE_E, FILE_F, FILE_G, FILE_H, FILE_NONE };
 enum { RANK_1, RANK_2, RANK_3, RANK_4, RANK_5, RANK_6, RANK_7, RANK_8, RANK_NONE };
@@ -25,7 +27,18 @@ enum {
     A8 = 91, B8, C8, D8, E8, F8, G8, H8, NO_SQUARE, OFFBOARD
 };
 
-enum {FALSE, TRUE };
+enum { FALSE, TRUE };
+
+enum { WKCA = 1, WQCA = 2, BKCA = 4, BQCA = 8 }; // Castling mechanic
+
+typedef struct {
+    int move;
+    int castlePerm;
+    int enPas;
+    int fiftyMove;
+    U64 posKey;
+
+} S_UNDO;
 
 typedef struct {
 
@@ -37,10 +50,10 @@ typedef struct {
     int enPas;
     int FiftyMove;
 
-    int ply;
-    int hisply;
+    int play;
+    int hisPlay;
 
-    int castlePerm;
+    int castlePerm; // Castle permissions
 
     U64 posKey;
 
@@ -48,8 +61,11 @@ typedef struct {
     int bigPce[2];
     int majPce[2];
     int minPce[2];
+
+
     int material[2];
 
+    S_UNDO history[MAX_GAME_MOVES]; // stores game information into U_UNDO type array named history
 
 } S_BOARD;
 
