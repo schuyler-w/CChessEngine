@@ -86,6 +86,9 @@ typedef struct {
 
     S_UNDO history[MAX_GAME_MOVES]; // stores game information into U_UNDO type array named history
 
+    //piece list
+    int pList[13][10];
+
 } S_BOARD;
 
 /* MACROS */
