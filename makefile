@@ -1,2 +1,2 @@
 all:
-	gcc main.c init.c -o engine
+	gcc main.c init.c bitboards.c -o engine
