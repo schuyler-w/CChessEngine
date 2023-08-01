@@ -19,7 +19,7 @@ void UpdateListsMaterial(S_BOARD *pos) {
             color = PieceColor[piece];
             ASSERT(SideValid(color))
 
-            if( PieceBig[piece] == TRUE) pos->bigPce[color]++;
+            if( PieceBig[piece]   == TRUE) pos->bigPce[color]++;
             if( PieceMinor[piece] == TRUE) pos->minPce[color]++;
             if( PieceMajor[piece] == TRUE) pos->majPce[color]++;
 
@@ -30,16 +30,15 @@ void UpdateListsMaterial(S_BOARD *pos) {
             pos->pList[piece][pos->pceNum[piece]] = sq;
             pos->pceNum[piece]++;
 
+            if (piece==wK) pos->KingSq[WHITE] = sq;
+            if (piece==bK) pos->KingSq[BLACK] = sq;
 
-            if(piece==wK) pos->KingSq[WHITE] = sq;
-            if(piece==bK) pos->KingSq[BLACK] = sq;
-
-            if(piece==wP) {
-                SETBIT(pos->pawns[WHITE],SQ64(sq));
-                SETBIT(pos->pawns[BOTH],SQ64(sq));
-            } else if(piece==bP) {
-                SETBIT(pos->pawns[BLACK],SQ64(sq));
-                SETBIT(pos->pawns[BOTH],SQ64(sq));
+            if (piece==wP) {
+                SETBIT(pos->pawns[WHITE], SQ64(sq));
+                SETBIT(pos->pawns[BOTH], SQ64(sq));
+            } else if (piece==bP) {
+                SETBIT(pos->pawns[BLACK], SQ64(sq));
+                SETBIT(pos->pawns[BOTH], SQ64(sq));
             }
         }
     }

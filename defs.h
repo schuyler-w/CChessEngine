@@ -7,32 +7,32 @@
 // #define DEBUG
 
 #define MAX_HASH 1024
+
 #ifndef DEBUG
 #define ASSERT(n)
 #else
-#define ASSERT(n)                \
-if(!(n)) {                       \
-printf("%s - Failed",#n);        \
-printf("On %s ",__DATE__);       \
-printf("At %s ",__TIME__);       \
-printf("In File %s ",__FILE__);  \
-printf("At Line %d\n",__LINE__); \
+#define ASSERT(n)                   \
+if(!(n)) {                          \
+printf("%s - Failed",#n);           \
+printf("On %s ",__DATE__);          \
+printf("At %s ",__TIME__);          \
+printf("In File %s ",__FILE__);     \
+printf("At Line %d\n",__LINE__);    \
 exit(1);}
 #endif
 
-typedef unsigned long long U64; // 64 bit long long integer definition
+typedef unsigned long long U64;
 
-#define NAME "Chess Engine v0.1"
+#define NAME "CEngine"
 #define BRD_SQ_NUM 120
 
-#define MAX_GAME_MOVES 2048 // 1024 half moves
+#define MAXGAMEMOVES 2048 // 1024 Half moves
 
-#define START_FEN "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1" // Starting Forsyth-Edwards Notation (FEN) string
+#define START_FEN  "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1" // Starting Forsyth-Edwards Notation (FEN) string
 
-enum { EMPTY, wP, wN, wB, wR, wQ, wK, bP, bN, bB, bR, bQ, bK };
+enum { EMPTY, wP, wN, wB, wR, wQ, wK, bP, bN, bB, bR, bQ, bK  };
 enum { FILE_A, FILE_B, FILE_C, FILE_D, FILE_E, FILE_F, FILE_G, FILE_H, FILE_NONE };
 enum { RANK_1, RANK_2, RANK_3, RANK_4, RANK_5, RANK_6, RANK_7, RANK_8, RANK_NONE };
-
 
 enum { WHITE, BLACK, BOTH }; // White = 0, Black = 1, Both = 2
 enum { UCIMODE, XBOARDMODE, CONSOLEMODE };
@@ -50,13 +50,14 @@ enum {
 
 enum { FALSE, TRUE };
 
-enum { WKCA = 1, WQCA = 2, BKCA = 4, BQCA = 8 }; // Castling permissions, integer 0 0 0 0, each bit denoting perm
+enum { WKCA = 1, WQCA = 2, BKCA = 4, BQCA = 8 };
 
-typedef struct { // Undo move data structure
+typedef struct {
+
     int move;
     int castlePerm;
     int enPas;
-    int fiftyMove;
+    int FiftyMove;
     U64 posKey;
 
 } S_UNDO;
@@ -64,7 +65,8 @@ typedef struct { // Undo move data structure
 typedef struct {
 
     int pieces[BRD_SQ_NUM];
-    U64 pawns[3]; // Array of 3 pawns (white, black, both)
+
+    U64 pawns[3];
     int KingSq[2];
 
     int side;
@@ -74,36 +76,37 @@ typedef struct {
     int play;
     int hisPlay;
 
-    int castlePerm; // Castle permission int ie: 0 0 0 0
+    int castlePerm; // permissions integer ie: 0 0 0 0, each bit represents 1 castle variable permission
 
-    U64 posKey; // Hash key
+    U64 posKey;
 
     int pceNum[13];
     int bigPce[2];
     int majPce[2];
     int minPce[2];
+    int material[2];
 
-    int material[2]; // Scores
+    S_UNDO history[MAXGAMEMOVES];
 
-    S_UNDO history[MAX_GAME_MOVES]; // stores game information into U_UNDO type array named history
-
-    //piece list
+    // piece list
     int pList[13][10];
 
 } S_BOARD;
 
 /* MACROS */
 
-#define FR2SQ( f, r ) ( (21 + (f) ) + ( (r) * 10 ) ) // f = file, r = rank
+#define FR2SQ(f,r) ( (21 + (f) ) + ( (r) * 10 ) )
 
-//Shortcut macros
+// Shortcut Macros
 #define SQ64(sq120) (Sq120ToSq64[(sq120)])
 #define SQ120(sq64) (Sq64ToSq120[(sq64)])
+
 #define POP(b) PopBit(b)
 #define CNT(b) CountBits(b)
 
-#define CLEARBIT(bb, sq) ((bb) &= ClearMask[(sq)])
-#define SETBIT(bb, sq) ((bb) != SetMask[(sq)])
+#define CLRBIT(bb,sq) ((bb) &= ClearMask[(sq)])
+#define SETBIT(bb,sq) ((bb) |= SetMask[(sq)])
+
 
 /* GLOBALS */
 
@@ -139,9 +142,9 @@ extern int RanksBrd[BRD_SQ_NUM];
 extern void InitAll();
 
 // bitboards.c
-extern void PrintBitBoard(U64 bitboard);
+extern void PrintBitBoard(U64 bb);
 extern int PopBit(U64 *bb);
-extern int CountBits(U64 bb);
+extern int CountBits(U64 b);
 
 // hashkeys.c
 extern U64 GeneratePosKey(const S_BOARD *pos);
@@ -152,4 +155,4 @@ extern int ParseFen(char *fen, S_BOARD *pos);
 extern void PrintBoard(const S_BOARD *pos);
 extern void UpdateListsMaterial(S_BOARD *pos);
 
-#endif //CHESSENGINE_DEFS_H
+#endif //CHESS_ENGINE_DEFS_H

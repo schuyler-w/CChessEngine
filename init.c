@@ -44,7 +44,6 @@ void InitBitMasks() {
         SetMask[i] |= (1ULL << i);
         ClearMask[i] = ~SetMask[i];
     }
-
 }
 
 void InitSq120To64() {
@@ -91,7 +90,26 @@ void InitFilesRanksBrd() {
             RanksBrd[sq] = rank;
         }
     }
+
+/*
+    printf("FilesBrd\n");
+    for (int i =0; i < BRD_SQ_NUM; ++i) {
+        if (i%10==0 && i != 0)
+            printf("\n");
+        printf("%4d", FilesBrd[i]);
+    }
+    printf("\n");
+    printf("RanksBrd\n");
+    for (int i =0; i < BRD_SQ_NUM; ++i) {
+        if (i%10==0 && i != 0)
+            printf("\n");
+        printf("%4d", RanksBrd[i]);
+    }
+    printf("\n");
+*/
+
 }
+
 
 void InitAll() {
     InitSq120To64();
