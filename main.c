@@ -23,8 +23,5 @@ int main(int argc, char *argv[]) {
     ParseFen(FEN3, board);
     PrintBoard(board);
 
-
-
-
     return 0;
 }

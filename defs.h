@@ -83,8 +83,7 @@ typedef struct {
     int majPce[2];
     int minPce[2];
 
-
-    int material[2];
+    int material[2]; // Scores
 
     S_UNDO history[MAX_GAME_MOVES]; // stores game information into U_UNDO type array named history
 
@@ -125,9 +124,10 @@ extern char FileChar[];
 
 extern int PieceBig[13];
 extern int PieceMajor[13];
-extern int PieceMin[13];
+extern int PieceMinor[13];
 extern int PieceValue[13];
 extern int PieceColor[13];
+
 extern int PiecePawn[13];
 
 /* FUNCTIONS */

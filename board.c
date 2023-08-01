@@ -14,18 +14,18 @@ void UpdateListsMaterial(S_BOARD *pos) {
     for(int i = 0; i < BRD_SQ_NUM; ++i) {
         sq = i;
         piece = pos->pieces[i];
-        ASSERT(PceValidEmptyOffbrd(piece));
+        ASSERT(PceValidEmptyOffbrd(piece))
         if(piece!=OFFBOARD && piece!= EMPTY) {
             color = PieceColor[piece];
-            ASSERT(SideValid(colour));
+            ASSERT(SideValid(color))
 
             if( PieceBig[piece] == TRUE) pos->bigPce[color]++;
-            if( PieceMin[piece] == TRUE) pos->minPce[color]++;
+            if( PieceMinor[piece] == TRUE) pos->minPce[color]++;
             if( PieceMajor[piece] == TRUE) pos->majPce[color]++;
 
             pos->material[color] += PieceValue[piece];
 
-            ASSERT(pos->pceNum[piece] < 10 && pos->pceNum[piece] >= 0);
+            ASSERT(pos->pceNum[piece] < 10 && pos->pceNum[piece] >= 0)
 
             pos->pList[piece][pos->pceNum[piece]] = sq;
             pos->pceNum[piece]++;
@@ -110,7 +110,7 @@ int ParseFen(char *fen, S_BOARD *pos) {
         fen++;
     }
 
-    ASSERT(*fen == 'w' || *fen == 'b');
+    ASSERT(*fen == 'w' || *fen == 'b')
 
     pos->side = (*fen == 'w') ? WHITE : BLACK;
     fen += 2;
@@ -130,14 +130,14 @@ int ParseFen(char *fen, S_BOARD *pos) {
     }
     fen++;
 
-    ASSERT(pos->castlePerm>=0 && pos->castlePerm <= 15);
+    ASSERT(pos->castlePerm>=0 && pos->castlePerm <= 15)
 
     if (*fen != '-') {
         file = fen[0] - 'a';
         rank = fen[1] - '1';
 
-        ASSERT(file>=FILE_A && file <= FILE_H);
-        ASSERT(rank>=RANK_1 && rank <= RANK_8);
+        ASSERT(file>=FILE_A && file <= FILE_H)
+        ASSERT(rank>=RANK_1 && rank <= RANK_8)
 
         pos->enPas = FR2SQ(file,rank);
     }
