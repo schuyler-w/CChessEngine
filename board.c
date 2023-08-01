@@ -47,8 +47,8 @@ void UpdateListsMaterial(S_BOARD *pos) {
 
 int ParseFen(char *fen, S_BOARD *pos) {
 
-    ASSERT(fen!=NULL);
-    ASSERT(pos!=NULL);
+    ASSERT(fen!=NULL)
+    ASSERT(pos!=NULL)
 
     int  rank = RANK_8;
     int  file = FILE_A;
