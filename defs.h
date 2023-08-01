@@ -129,4 +129,7 @@ extern int CountBits(U64 bb);
 // hashkeys.c
 extern U64 GeneratePosKey(const S_BOARD *pos);
 
+// board.c
+extern void ResetBoard(S_BOARD *pos);
+
 #endif //CHESSENGINE_DEFS_H
