@@ -27,7 +27,9 @@ typedef unsigned long long U64; // 64 bit long long integer definition
 
 #define MAX_GAME_MOVES 2048 // 1024 half moves
 
-enum { EMPTY, wP, wKn, wB, wR, wQ, wK, bP, bKn, bB, bR, bQ, bK };
+#define START_FEN "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1" // Starting Forsyth-Edwards Notation (FEN) string
+
+enum { EMPTY, wP, wN, wB, wR, wQ, wK, bP, bN, bB, bR, bQ, bK };
 enum { FILE_A, FILE_B, FILE_C, FILE_D, FILE_E, FILE_F, FILE_G, FILE_H, FILE_NONE };
 enum { RANK_1, RANK_2, RANK_3, RANK_4, RANK_5, RANK_6, RANK_7, RANK_8, RANK_NONE };
 
@@ -116,6 +118,18 @@ extern U64 PieceKeys[13][120];
 extern U64 SideKey;
 extern U64 CastleKeys[16];
 
+extern char PieceChar[];
+extern char SideChar[];
+extern char RankChar[];
+extern char FileChar[];
+
+extern int PieceBig[13];
+extern int PieceMajor[13];
+extern int PieceMin[13];
+extern int PieceValue[13];
+extern int PieceColor[13];
+extern int PiecePawn[13];
+
 /* FUNCTIONS */
 
 // init.c
@@ -131,5 +145,8 @@ extern U64 GeneratePosKey(const S_BOARD *pos);
 
 // board.c
 extern void ResetBoard(S_BOARD *pos);
+extern int ParseFen(char *fen, S_BOARD *pos);
+extern void PrintBoard(const S_BOARD *pos);
+extern void UpdateListsMaterial(S_BOARD *pos);
 
 #endif //CHESSENGINE_DEFS_H
