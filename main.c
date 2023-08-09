@@ -16,14 +16,13 @@ int main(int argc, char *argv[]) {
 
     PrintBoard(board);
 
-    printf("\nwP:\n");
-    PrintBitBoard(board->pawns[WHITE]);
+    int val = CheckBoard(board);
+    printf("%d\n", val);
 
-    printf("\nbP:\n");
-    PrintBitBoard(board->pawns[BLACK]);
+    board->pceNum[wP]--;
 
-    printf("\nall:\n");
-    PrintBitBoard(board->pawns[BOTH]);
+    val = CheckBoard(board);
+    printf("%d\n", val);
 
     return 0;
 }

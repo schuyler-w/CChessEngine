@@ -14,7 +14,7 @@ U64 GeneratePosKey(const S_BOARD *pos) {
     for(sq = 0; sq < BRD_SQ_NUM; ++sq) {
         piece = pos->pieces[sq];
         if(piece!=NO_SQUARE && piece!=EMPTY && piece != OFFBOARD) {
-            ASSERT(piece>=wP && piece<=bK)
+            assert(piece>=wP && piece<=bK);
             finalKey ^= PieceKeys[piece][sq];
         }
     }
@@ -24,13 +24,13 @@ U64 GeneratePosKey(const S_BOARD *pos) {
     }
 
     if(pos->enPas != NO_SQUARE) {
-        ASSERT(pos->enPas>=0 && pos->enPas<BRD_SQ_NUM)
-        ASSERT(SqOnBoard(pos->enPas))
-        ASSERT(RanksBrd[pos->enPas] == RANK_3 || RanksBrd[pos->enPas] == RANK_6)
+        assert(pos->enPas>=0 && pos->enPas<BRD_SQ_NUM);
+        //assert(SqOnBoard(pos->enPas));
+        assert(RanksBrd[pos->enPas] == RANK_3 || RanksBrd[pos->enPas] == RANK_6);
         finalKey ^= PieceKeys[EMPTY][pos->enPas];
     }
 
-    ASSERT(pos->castlePerm>=0 && pos->castlePerm<=15)
+    assert(pos->castlePerm>=0 && pos->castlePerm<=15);
 
     finalKey ^= CastleKeys[pos->castlePerm];
 

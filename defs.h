@@ -3,27 +3,13 @@
 
 #include "stdlib.h"
 #include "stdio.h"
-
-// #define DEBUG
+#include <assert.h>
 
 #define MAX_HASH 1024
 
-#ifndef DEBUG
-#define ASSERT(n)
-#else
-#define ASSERT(n)                   \
-if(!(n)) {                          \
-printf("%s - Failed",#n);           \
-printf("On %s ",__DATE__);          \
-printf("At %s ",__TIME__);          \
-printf("In File %s ",__FILE__);     \
-printf("At Line %d\n",__LINE__);    \
-exit(1);}
-#endif
-
 typedef unsigned long long U64;
 
-#define NAME "CEngine"
+#define NAME "Chess Engine"
 #define BRD_SQ_NUM 120
 
 #define MAXGAMEMOVES 2048 // 1024 Half moves
@@ -154,5 +140,6 @@ extern void ResetBoard(S_BOARD *pos);
 extern int ParseFen(char *fen, S_BOARD *pos);
 extern void PrintBoard(const S_BOARD *pos);
 extern void UpdateListsMaterial(S_BOARD *pos);
+extern int CheckBoard(const S_BOARD *pos);
 
 #endif //CHESS_ENGINE_DEFS_H
